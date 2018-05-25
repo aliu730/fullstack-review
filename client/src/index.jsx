@@ -8,14 +8,29 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      repos: []
+      repos: [] // what we have available.
     }
 
   }
 
   search (term) {
-    console.log(`${term} was searched`);
-    // TODO
+    //console.log(`${term} was searched`); 
+    //  This is probably where the post request should happen.
+    // TODO : POST TO SERVER.
+    var search = JSON.stringify({ 0: (term)});
+    // console.log(search); 
+    $.ajax({
+      type: 'POST',
+      url: '/repos',
+      contentType: 'application/json', // has to be json to send to server then server parse back to string.
+      data: search,
+      success: function(data) {
+        console.log('data recieved', data);
+      },
+      failure: function (error) {
+        console.log('myerror ', error);
+      }
+    });
   }
 
   render () {
