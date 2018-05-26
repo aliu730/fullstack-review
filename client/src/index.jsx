@@ -32,7 +32,7 @@ class App extends React.Component {
         console.log('myerror ', error);
       }
     });
-  }
+  } 
   
   grabStuff () {
     var context = this;
