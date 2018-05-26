@@ -10,10 +10,9 @@ class App extends React.Component {
     this.state = { 
       repos: [] // what we have available.
     }
-
   }
-
   search (term) {
+    var context = this;
     //console.log(`${term} was searched`); 
     //  This is probably where the post request should happen.
     // TODO : POST TO SERVER.
@@ -25,14 +24,33 @@ class App extends React.Component {
       contentType: 'application/json', // has to be json to send to server then server parse back to string.
       data: search,
       success: function(data) {
-        console.log('data recieved', data);
+        // console.log('data recieved', data);
+        context.grabStuff();
+        // console.log(this);
       },
-      failure: function (error) {
+      error: function (error) {
         console.log('myerror ', error);
       }
     });
   }
-
+  
+  grabStuff () {
+    var context = this;
+    $.ajax({
+      type: 'GET',
+      url: '/grabrepos',
+      // accept: 'application/json',
+      success:function(data) {
+        // console.log('data:',data);
+        context.setState({
+          repos: data
+        })
+      },
+      error: function (err) {
+        console.log('err:', err);
+      }
+    });
+  }
   render () {
     return (<div>
       <h1>Github Fetcher</h1>

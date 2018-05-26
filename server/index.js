@@ -20,10 +20,14 @@ app.post('/repos', function (req, res) {
   res.end();
 });
 
-// app.get('/grabrepos', function (req, res) {
-//   // TODO - your code here!
-//   // This route should send back the top 25 repos
-// });
+app.get('/grabrepos', function (req, res) {
+  // TODO - your code here!
+  // This route should send back the top 25 repos
+  // console.log("running----")
+  callback = function (data) {res.send(data)};
+  db.grabData(callback);
+  // res.end();
+});
 
 
  
