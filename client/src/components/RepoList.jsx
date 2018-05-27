@@ -4,7 +4,11 @@ const RepoList = (props) => (
   <div>
     <h4> Repo List Component </h4>
     {props.repos.map((entry)=>(
-      <div>{entry.repoName}</div>
+      <div className="repo">
+      <span>{entry.owner}<br /></span>
+      <div>Repo: {entry.repoName}</div>
+      <div>Forks: {(entry.forks)}</div>
+      </div>
       )
     )}
   </div>

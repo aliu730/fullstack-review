@@ -24,7 +24,20 @@ app.get('/grabrepos', function (req, res) {
   // TODO - your code here!
   // This route should send back the top 25 repos
   // console.log("running----")
-  callback = function (data) {res.send(data)};
+  callback = function (data) {
+    data.sort(function(a,b) {
+      return b.forks-a.forks;
+    });
+    var uniqData = [];
+    var outputData = [];
+    for (var i = 0; i < data.length; i++) {
+      if (uniqData.indexOf(data[i].repoName) === -1) {
+        uniqData.push(data[i].repoName);
+        outputData.push(data[i]);
+      }
+    }
+    res.send(outputData.slice(0,25));
+  };
   db.grabData(callback);
   // res.end();
 });
